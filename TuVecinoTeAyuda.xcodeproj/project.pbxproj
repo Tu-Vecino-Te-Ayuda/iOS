@@ -22,6 +22,8 @@
 		A5421A6D24262A8D00D62CCF /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A6C24262A8D00D62CCF /* Images.swift */; };
 		A5421A6F2426840100D62CCF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A6E2426840100D62CCF /* Coordinator.swift */; };
 		A5421A712426873F00D62CCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A702426873F00D62CCF /* Constants.swift */; };
+		A5421A742426A8F200D62CCF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A732426A8F200D62CCF /* LoginViewModel.swift */; };
+		A5421A772426A95300D62CCF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A762426A95300D62CCF /* Service.swift */; };
 		A5421A7A2426B6F900D62CCF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A792426B6F900D62CCF /* LoginResponse.swift */; };
 		A5421A7C2426B73800D62CCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A7B2426B73800D62CCF /* User.swift */; };
 		A5421A7F2426C8B500D62CCF /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A7E2426C8B500D62CCF /* APIParser.swift */; };
@@ -67,6 +69,8 @@
 		A5421A6C24262A8D00D62CCF /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		A5421A6E2426840100D62CCF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = ViewControllers/Coordinator.swift; sourceTree = "<group>"; };
 		A5421A702426873F00D62CCF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A5421A732426A8F200D62CCF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A5421A762426A95300D62CCF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		A5421A792426B6F900D62CCF /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		A5421A7B2426B73800D62CCF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A5421A7E2426C8B500D62CCF /* APIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
@@ -189,12 +193,13 @@
 		A5421A5F2425472100D62CCF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A5421A752426A94A00D62CCF /* API */,
 				A5421A6E2426840100D62CCF /* Coordinator.swift */,
+				A5421A752426A94A00D62CCF /* API */,
 				A5421A652425820200D62CCF /* Common */,
 				36C7540024269DAF008087E5 /* Model */,
 				36C7540324269DEE008087E5 /* Utils */,
 				A5421A602425479100D62CCF /* ViewControllers */,
+				A5421A722426A8DE00D62CCF /* ViewModels */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -224,9 +229,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A5421A722426A8DE00D62CCF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A5421A732426A8F200D62CCF /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		A5421A752426A94A00D62CCF /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A5421A762426A95300D62CCF /* Service.swift */,
 				A5421A7D2426C89B00D62CCF /* Parser */,
 				A5421A782426B6D600D62CCF /* Responses */,
 			);
@@ -391,6 +405,8 @@
 				36C7540224269DBD008087E5 /* Province.swift in Sources */,
 				A5421A62242547B900D62CCF /* LoginViewController.swift in Sources */,
 				A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */,
+				A5421A772426A95300D62CCF /* Service.swift in Sources */,
+				A5421A742426A8F200D62CCF /* LoginViewModel.swift in Sources */,
 				A5421A712426873F00D62CCF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

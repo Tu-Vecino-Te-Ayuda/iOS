@@ -10,6 +10,8 @@ import UIKit
 protocol LoginViewControllerDelegate {
     func loginViewControllerRegisterVolunteer(_ sender: LoginViewController)
     func loginViewControllerRegisterRequestor(_ sender: LoginViewController)
+    func loginViewController(_ sender: LoginViewController, userLogged: User)
+    func loginViewController(_ sender: LoginViewController, didError: Error)
 }
 
 final class LoginViewController: UIViewController {
@@ -64,39 +66,53 @@ final class LoginViewController: UIViewController {
     
     var loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Iniciar sesión", for: .normal)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
     var volunteerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Quiero ayudar", for: .normal)
         button.addTarget(self, action: #selector(volunteerRegisterTapped), for: .touchUpInside)
         return button
     }()
     
     var requestorButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Necesito ayuda", for: .normal)
         button.addTarget(self, action: #selector(requestorRegisterTapped), for: .touchUpInside)
         return button
     }()
     
     var delegate: LoginViewControllerDelegate?
     
+    // MARK: - Private properties
+    
+    private let viewModel: LoginViewModel
+    
     // MARK: - Object lifecycle
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupLayout()
+        setupViewModel()
     }
     
     // MARK: - Private methods
     
     private func setupView() {
-        title = "Tu vecino te ayuda"
+        title = viewModel.title
+        requestorButton.setTitle(viewModel.requestorTitle, for: .normal)
+        volunteerButton.setTitle(viewModel.volunteerTitle, for: .normal)
+        loginButton.setTitle(viewModel.loginTitle, for: .normal)
         userField.delegate = self
         passwordField.delegate = self
         configureTapGesture()
@@ -128,6 +144,22 @@ final class LoginViewController: UIViewController {
         ])
     }
     
+    private func setupViewModel() {
+        viewModel.error = { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.delegate?.loginViewController(self, didError: error)
+            }
+        }
+        
+        viewModel.logged = { [weak self] user in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.delegate?.loginViewController(self, userLogged: user)
+            }
+        }
+    }
+    
     private func configureTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleViewTap))
         view.addGestureRecognizer(tapGesture)
@@ -140,8 +172,11 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func loginTapped() {
+        guard let user = userField.text, let password = passwordField.text else {
+            return
+        }
         loginButton.endEditing(true)
-        // Do login
+        viewModel.login(user: user, password: password)
     }
     
     @objc
