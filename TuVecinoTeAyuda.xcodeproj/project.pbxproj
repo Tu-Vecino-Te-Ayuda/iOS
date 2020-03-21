@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A2E24252CC500D62CCF /* AppDelegate.swift */; };
-		A5421A3124252CC500D62CCF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A3024252CC500D62CCF /* SceneDelegate.swift */; };
-		A5421A3324252CC500D62CCF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A3224252CC500D62CCF /* ViewController.swift */; };
 		A5421A3624252CC500D62CCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5421A3424252CC500D62CCF /* Main.storyboard */; };
 		A5421A3824252CC900D62CCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5421A3724252CC900D62CCF /* Assets.xcassets */; };
 		A5421A3B24252CC900D62CCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5421A3924252CC900D62CCF /* LaunchScreen.storyboard */; };
 		A5421A4624252CCA00D62CCF /* TuVecinoTeAyudaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A4524252CCA00D62CCF /* TuVecinoTeAyudaTests.swift */; };
 		A5421A5124252CCA00D62CCF /* TuVecinoTeAyudaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A5024252CCA00D62CCF /* TuVecinoTeAyudaUITests.swift */; };
+		A5421A62242547B900D62CCF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A61242547B900D62CCF /* LoginViewController.swift */; };
+		A5421A672425821200D62CCF /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A662425821200D62CCF /* UIView+Extensions.swift */; };
+		A5421A6B2426205600D62CCF /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5421A6A2426205600D62CCF /* AuthenticationServices.framework */; };
+		A5421A6D24262A8D00D62CCF /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A6C24262A8D00D62CCF /* Images.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +39,6 @@
 /* Begin PBXFileReference section */
 		A5421A2B24252CC500D62CCF /* TuVecinoTeAyuda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TuVecinoTeAyuda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5421A2E24252CC500D62CCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5421A3024252CC500D62CCF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A5421A3224252CC500D62CCF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A5421A3524252CC500D62CCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5421A3724252CC900D62CCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5421A3A24252CC900D62CCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +49,11 @@
 		A5421A4C24252CCA00D62CCF /* TuVecinoTeAyudaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TuVecinoTeAyudaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5421A5024252CCA00D62CCF /* TuVecinoTeAyudaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuVecinoTeAyudaUITests.swift; sourceTree = "<group>"; };
 		A5421A5224252CCA00D62CCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5421A61242547B900D62CCF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A5421A662425821200D62CCF /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		A5421A682426205600D62CCF /* TuVecinoTeAyuda.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TuVecinoTeAyuda.entitlements; sourceTree = "<group>"; };
+		A5421A6A2426205600D62CCF /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		A5421A6C24262A8D00D62CCF /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5421A6B2426205600D62CCF /* AuthenticationServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +89,7 @@
 				A5421A4424252CCA00D62CCF /* TuVecinoTeAyudaTests */,
 				A5421A4F24252CCA00D62CCF /* TuVecinoTeAyudaUITests */,
 				A5421A2C24252CC500D62CCF /* Products */,
+				A5421A692426205600D62CCF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +106,10 @@
 		A5421A2D24252CC500D62CCF /* TuVecinoTeAyuda */ = {
 			isa = PBXGroup;
 			children = (
-				A5421A2E24252CC500D62CCF /* AppDelegate.swift */,
-				A5421A3024252CC500D62CCF /* SceneDelegate.swift */,
-				A5421A3224252CC500D62CCF /* ViewController.swift */,
-				A5421A3424252CC500D62CCF /* Main.storyboard */,
-				A5421A3724252CC900D62CCF /* Assets.xcassets */,
-				A5421A3924252CC900D62CCF /* LaunchScreen.storyboard */,
+				A5421A682426205600D62CCF /* TuVecinoTeAyuda.entitlements */,
 				A5421A3C24252CC900D62CCF /* Info.plist */,
+				A5421A5F2425472100D62CCF /* Classes */,
+				A5421A5E2425471800D62CCF /* Resources */,
 			);
 			path = TuVecinoTeAyuda;
 			sourceTree = "<group>";
@@ -126,6 +130,51 @@
 				A5421A5224252CCA00D62CCF /* Info.plist */,
 			);
 			path = TuVecinoTeAyudaUITests;
+			sourceTree = "<group>";
+		};
+		A5421A5E2425471800D62CCF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5421A2E24252CC500D62CCF /* AppDelegate.swift */,
+				A5421A6C24262A8D00D62CCF /* Images.swift */,
+				A5421A3724252CC900D62CCF /* Assets.xcassets */,
+				A5421A3924252CC900D62CCF /* LaunchScreen.storyboard */,
+				A5421A3424252CC500D62CCF /* Main.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A5421A5F2425472100D62CCF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A5421A652425820200D62CCF /* Common */,
+				A5421A602425479100D62CCF /* ViewControllers */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A5421A602425479100D62CCF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A5421A61242547B900D62CCF /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A5421A652425820200D62CCF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A5421A662425821200D62CCF /* UIView+Extensions.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		A5421A692426205600D62CCF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5421A6A2426205600D62CCF /* AuthenticationServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +308,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5421A3324252CC500D62CCF /* ViewController.swift in Sources */,
+				A5421A672425821200D62CCF /* UIView+Extensions.swift in Sources */,
+				A5421A6D24262A8D00D62CCF /* Images.swift in Sources */,
+				A5421A62242547B900D62CCF /* LoginViewController.swift in Sources */,
 				A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */,
-				A5421A3124252CC500D62CCF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,8 +484,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TuVecinoTeAyuda/TuVecinoTeAyuda.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TuVecinoTeAyuda/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,8 +503,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TuVecinoTeAyuda/TuVecinoTeAyuda.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TuVecinoTeAyuda/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
