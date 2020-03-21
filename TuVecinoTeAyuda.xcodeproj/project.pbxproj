@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36C753FF242690BD008087E5 /* municipalities.json in Resources */ = {isa = PBXBuildFile; fileRef = 36C753FE242690BD008087E5 /* municipalities.json */; };
+		36C7540224269DBD008087E5 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7540124269DBD008087E5 /* Province.swift */; };
+		36C7540524269E0C008087E5 /* DecodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7540424269E0C008087E5 /* DecodableExtensions.swift */; };
+		36C7540724269E40008087E5 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C7540624269E40008087E5 /* File.swift */; };
 		A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A2E24252CC500D62CCF /* AppDelegate.swift */; };
 		A5421A3624252CC500D62CCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5421A3424252CC500D62CCF /* Main.storyboard */; };
 		A5421A3824252CC900D62CCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5421A3724252CC900D62CCF /* Assets.xcassets */; };
@@ -37,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36C753FE242690BD008087E5 /* municipalities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = municipalities.json; sourceTree = "<group>"; };
+		36C7540124269DBD008087E5 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
+		36C7540424269E0C008087E5 /* DecodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtensions.swift; sourceTree = "<group>"; };
+		36C7540624269E40008087E5 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A5421A2B24252CC500D62CCF /* TuVecinoTeAyuda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TuVecinoTeAyuda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5421A2E24252CC500D62CCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5421A3524252CC500D62CCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +90,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36C753FD242690B0008087E5 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				36C753FE242690BD008087E5 /* municipalities.json */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		36C7540024269DAF008087E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				36C7540124269DBD008087E5 /* Province.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36C7540324269DEE008087E5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				36C7540424269E0C008087E5 /* DecodableExtensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		A5421A2224252CC400D62CCF = {
 			isa = PBXGroup;
 			children = (
@@ -135,7 +167,9 @@
 		A5421A5E2425471800D62CCF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				36C753FD242690B0008087E5 /* data */,
 				A5421A2E24252CC500D62CCF /* AppDelegate.swift */,
+				36C7540624269E40008087E5 /* File.swift */,
 				A5421A6C24262A8D00D62CCF /* Images.swift */,
 				A5421A3724252CC900D62CCF /* Assets.xcassets */,
 				A5421A3924252CC900D62CCF /* LaunchScreen.storyboard */,
@@ -148,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				A5421A652425820200D62CCF /* Common */,
+				36C7540024269DAF008087E5 /* Model */,
+				36C7540324269DEE008087E5 /* Utils */,
 				A5421A602425479100D62CCF /* ViewControllers */,
 			);
 			path = Classes;
@@ -284,6 +320,7 @@
 				A5421A3B24252CC900D62CCF /* LaunchScreen.storyboard in Resources */,
 				A5421A3824252CC900D62CCF /* Assets.xcassets in Resources */,
 				A5421A3624252CC500D62CCF /* Main.storyboard in Resources */,
+				36C753FF242690BD008087E5 /* municipalities.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +346,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5421A672425821200D62CCF /* UIView+Extensions.swift in Sources */,
+				36C7540724269E40008087E5 /* File.swift in Sources */,
 				A5421A6D24262A8D00D62CCF /* Images.swift in Sources */,
+				36C7540524269E0C008087E5 /* DecodableExtensions.swift in Sources */,
+				36C7540224269DBD008087E5 /* Province.swift in Sources */,
 				A5421A62242547B900D62CCF /* LoginViewController.swift in Sources */,
 				A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */,
 			);
