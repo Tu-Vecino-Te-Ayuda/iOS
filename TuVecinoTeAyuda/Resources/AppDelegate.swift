@@ -11,10 +11,31 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var coordinator: Coordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = .white
+        
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = .white
+        window?.rootViewController = makeCoordinator()
+        window?.makeKeyAndVisible()
+        
+        coordinator?.start()
+    }
+    
+    private func makeCoordinator() -> UINavigationController {
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.barTintColor = Constants.Colors.main
+        coordinator = Coordinator(navigationController: navigationController)
+        return navigationController
     }
 }
 

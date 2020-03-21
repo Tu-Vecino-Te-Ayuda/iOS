@@ -7,7 +7,12 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+protocol LoginViewControllerDelegate {
+    func loginViewControllerRegisterVolunteer(_ sender: LoginViewController)
+    func loginViewControllerRegisterRequestor(_ sender: LoginViewController)
+}
+
+final class LoginViewController: UIViewController {
     
     // MARK: - Internal properties
     
@@ -58,24 +63,29 @@ class LoginViewController: UIViewController {
     }()
     
     var loginButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Iniciar sesión", for: .normal)
+        button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
     var volunteerButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Quiero ayudar", for: .normal)
+        button.addTarget(self, action: #selector(volunteerRegisterTapped), for: .touchUpInside)
         return button
     }()
     
     var requestorButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Necesito ayuda", for: .normal)
+        button.addTarget(self, action: #selector(requestorRegisterTapped), for: .touchUpInside)
         return button
     }()
     
-    // MARK: - Private properties
+    var delegate: LoginViewControllerDelegate?
+    
+    // MARK: - Object lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,18 +93,21 @@ class LoginViewController: UIViewController {
         setupLayout()
     }
     
-    func setupView() {
+    // MARK: - Private methods
+    
+    private func setupView() {
         title = "Tu vecino te ayuda"
         userField.delegate = self
         passwordField.delegate = self
         configureTapGesture()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         view.addSubview(backgroundImageView)
         view.safeFit(backgroundImageView)
         view.addSubview(heroImageView)
         view.addSubview(loginStackView)
+        view.addSubview(registerStackView)
         
         loginStackView.addArrangedSubview(userField)
         loginStackView.addArrangedSubview(passwordField)
@@ -109,22 +122,38 @@ class LoginViewController: UIViewController {
             loginStackView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: LayoutParameters.spacing),
             loginStackView.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: LayoutParameters.spacing),
             loginStackView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -LayoutParameters.spacing),
+            registerStackView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: LayoutParameters.margin),
+            registerStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: LayoutParameters.verticalSpacing),
+            registerStackView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -LayoutParameters.margin),
         ])
     }
     
     private func configureTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleViewTap))
         view.addGestureRecognizer(tapGesture)
     }
     
     @objc
-    private func handleTap() {
+    private func handleViewTap() {
         view.endEditing(true)
     }
     
-    private func loginPressed() {
+    @objc
+    private func loginTapped() {
         loginButton.endEditing(true)
         // Do login
+    }
+    
+    @objc
+    private func requestorRegisterTapped() {
+        // Go to Requesto form
+        delegate?.loginViewControllerRegisterRequestor(self)
+    }
+    
+    @objc
+    private func volunteerRegisterTapped() {
+        // Go to Requesto form
+        delegate?.loginViewControllerRegisterVolunteer(self)
     }
 }
 
@@ -142,6 +171,7 @@ extension LoginViewController: UITextFieldDelegate {
 private extension LoginViewController {
     struct LayoutParameters {
         static let spacing: CGFloat = 16.0
+        static let verticalSpacing: CGFloat = 40.0
         static let margin: CGFloat = 16.0
     }
 }
