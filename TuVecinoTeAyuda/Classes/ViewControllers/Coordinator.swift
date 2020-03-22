@@ -13,11 +13,13 @@ final class Coordinator {
     
     /// Navigation controller responsible of handling all app internal navigation
     private let navigationController: UINavigationController
+    private let service: ServiceType
     
     // MARK: - Object lifecycle
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, service: ServiceType) {
         self.navigationController = navigationController
+        self.service = service
     }
     
     // MARK: - Internal methods
@@ -31,7 +33,8 @@ final class Coordinator {
     
     /// Create and show login view controller
     private func showLoginViewController() {
-        let loginViewController = LoginViewController()
+        let loginViewModel = LoginViewModel(service: service)
+        let loginViewController = LoginViewController(viewModel: loginViewModel)
         loginViewController.delegate = self
         navigationController.setViewControllers([loginViewController], animated: false)
     }
