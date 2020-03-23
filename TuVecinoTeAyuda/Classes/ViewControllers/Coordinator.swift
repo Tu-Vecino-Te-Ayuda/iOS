@@ -54,6 +54,14 @@ final class Coordinator {
     //        navigationController.present(requestorRegisterViewController, animated: true)
             debugPrint("showRequestorRegister")
         }
+    
+    /// Create and show dashboard view controller
+    private func showDashboard() {
+        //        let dashboardViewController = DashboardViewController()
+        //        dashboardViewController.delegate = self
+        //        navigationController.present(dashboardViewController, animated: true)
+                debugPrint("showDashboard")
+    }
 }
 
 // MARK: - Extensions
@@ -67,5 +75,13 @@ extension Coordinator: LoginViewControllerDelegate {
     
     func loginViewControllerRegisterRequestor(_ sender: LoginViewController) {
         showRequestorRegister()
+    }
+    
+    func loginViewController(_ sender: LoginViewController, userLogged: User) {
+        showDashboard()
+    }
+    
+    func loginViewController(_ sender: LoginViewController, didError error: Error) {
+        debugPrint(error)
     }
 }
