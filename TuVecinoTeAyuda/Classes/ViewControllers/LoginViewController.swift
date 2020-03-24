@@ -24,6 +24,16 @@ final class LoginViewController: UIViewController {
         return imageView
     }()
     
+    var loginContainerView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 20
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        return view
+    }()
+    
     var loginStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,19 +75,28 @@ final class LoginViewController: UIViewController {
     }()
     
     var loginButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
+        button.layer.cornerRadius = 20
+        button.layer.backgroundColor = Constants.Colors.green.cgColor
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
     var volunteerButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
+        button.layer.cornerRadius = 20
+        button.layer.backgroundColor = Constants.Colors.main.cgColor
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(volunteerRegisterTapped), for: .touchUpInside)
         return button
     }()
     
     var requestorButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
+        button.layer.cornerRadius = 20
+        button.layer.backgroundColor = Constants.Colors.main.cgColor
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(requestorRegisterTapped), for: .touchUpInside)
         return button
     }()
@@ -101,46 +120,73 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupLayout()
-        setupViewModel()
+        self.setupView()
+        self.setupLayout()
+        self.setupViewModel()
     }
     
     // MARK: - Private methods
     
     private func setupView() {
         title = viewModel.title
-        requestorButton.setTitle(viewModel.requestorTitle, for: .normal)
-        volunteerButton.setTitle(viewModel.volunteerTitle, for: .normal)
-        loginButton.setTitle(viewModel.loginTitle, for: .normal)
-        userField.delegate = self
-        passwordField.delegate = self
-        configureTapGesture()
+        self.requestorButton.setTitle(viewModel.requestorTitle, for: .normal)
+        self.volunteerButton.setTitle(viewModel.volunteerTitle, for: .normal)
+        self.loginButton.setTitle(viewModel.loginTitle, for: .normal)
+        self.userField.delegate = self
+        self.passwordField.delegate = self
+        self.configureTapGesture()
     }
     
     private func setupLayout() {
-        view.addSubview(backgroundImageView)
-        view.safeFit(backgroundImageView)
-        view.addSubview(heroImageView)
-        view.addSubview(loginStackView)
-        view.addSubview(registerStackView)
+        self.view.addSubview(self.backgroundImageView)
+        self.view.safeFit(self.backgroundImageView)
+        self.view.addSubview(self.heroImageView)
+        self.view.addSubview(self.loginContainerView)
+        self.view.addSubview(self.registerStackView)
         
-        loginStackView.addArrangedSubview(userField)
-        loginStackView.addArrangedSubview(passwordField)
-        loginStackView.addArrangedSubview(loginButton)
-        registerStackView.addArrangedSubview(volunteerButton)
-        registerStackView.addArrangedSubview(requestorButton)
+        self.loginContainerView.addSubview(self.loginStackView)
+        
+        self.loginStackView.addArrangedSubview(self.userField)
+        self.loginStackView.addArrangedSubview(self.passwordField)
+        self.loginStackView.addArrangedSubview(self.loginButton)
+        self.registerStackView.addArrangedSubview(self.volunteerButton)
+        self.registerStackView.addArrangedSubview(self.requestorButton)
         
         NSLayoutConstraint.activate([
-            heroImageView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: LayoutParameters.margin),
-            heroImageView.topAnchor.constraint(equalTo: view.safeTopAnchor, constant: LayoutParameters.margin),
-            heroImageView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -LayoutParameters.margin),
-            loginStackView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: LayoutParameters.spacing),
-            loginStackView.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: LayoutParameters.spacing),
-            loginStackView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -LayoutParameters.spacing),
-            registerStackView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor, constant: LayoutParameters.margin),
-            registerStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: LayoutParameters.verticalSpacing),
-            registerStackView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor, constant: -LayoutParameters.margin),
+            // Position the header image.
+            self.heroImageView.leadingAnchor.constraint(equalTo: self.view.safeLeadingAnchor, constant: LayoutParameters.margin),
+            self.heroImageView.topAnchor.constraint(equalTo: self.view.safeTopAnchor, constant: LayoutParameters.margin),
+            self.heroImageView.trailingAnchor.constraint(equalTo: self.view.safeTrailingAnchor, constant: -LayoutParameters.margin),
+            
+            // Then, set the login container.
+            self.loginContainerView.topAnchor.constraint(equalTo: self.heroImageView.bottomAnchor, constant: LayoutParameters.spacing),
+            self.loginContainerView.leadingAnchor.constraint(equalTo: self.view.safeLeadingAnchor, constant: LayoutParameters.spacing),
+            self.loginContainerView.trailingAnchor.constraint(equalTo: self.view.safeTrailingAnchor, constant: -LayoutParameters.spacing),
+            
+            // Some padding from the container view to the stack view.
+            self.loginStackView.leadingAnchor.constraint(equalTo: self.loginContainerView.leadingAnchor, constant: 15),
+            self.loginStackView.topAnchor.constraint(equalTo: self.loginContainerView.topAnchor, constant: 20),
+            self.loginContainerView.trailingAnchor.constraint(equalTo: self.loginStackView.trailingAnchor, constant: 15),
+            self.loginContainerView.bottomAnchor.constraint(equalTo: self.loginStackView.bottomAnchor, constant: 20),
+            
+            // Adjust the size of the text fields.
+            self.userField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor),
+            self.passwordField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor),
+            self.userField.heightAnchor.constraint(equalToConstant: 50),
+            self.passwordField.heightAnchor.constraint(equalToConstant: 50),
+            self.loginButton.heightAnchor.constraint(equalToConstant: 60),
+            self.loginStackView.widthAnchor.constraint(equalTo: self.loginButton.widthAnchor, multiplier: 1, constant: 95),
+            
+            // Then, the register elements.
+            self.registerStackView.topAnchor.constraint(equalTo: self.loginContainerView.bottomAnchor, constant: LayoutParameters.verticalSpacing),
+            self.registerStackView.leadingAnchor.constraint(equalTo: self.view.safeLeadingAnchor, constant: LayoutParameters.margin),
+            self.registerStackView.trailingAnchor.constraint(equalTo: self.view.safeTrailingAnchor, constant: -LayoutParameters.margin),
+            
+            // Setup of the register buttons.
+            self.requestorButton.widthAnchor.constraint(equalTo: self.loginButton.widthAnchor, multiplier: 1, constant: 30),
+            self.volunteerButton.widthAnchor.constraint(equalTo: self.requestorButton.widthAnchor),
+            self.requestorButton.heightAnchor.constraint(equalTo: self.loginButton.heightAnchor),
+            self.volunteerButton.heightAnchor.constraint(equalTo: self.requestorButton.heightAnchor),
         ])
     }
     
@@ -161,13 +207,13 @@ final class LoginViewController: UIViewController {
     }
     
     private func configureTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleViewTap))
-        view.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleViewTap))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     @objc
     private func handleViewTap() {
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     @objc
@@ -175,20 +221,20 @@ final class LoginViewController: UIViewController {
         guard let user = userField.text, let password = passwordField.text else {
             return
         }
-        loginButton.endEditing(true)
-        viewModel.login(user: user, password: password)
+        self.loginButton.endEditing(true)
+        self.viewModel.login(user: user, password: password)
     }
     
     @objc
     private func requestorRegisterTapped() {
         // Go to Requesto form
-        delegate?.loginViewControllerRegisterRequestor(self)
+        self.delegate?.loginViewControllerRegisterRequestor(self)
     }
     
     @objc
     private func volunteerRegisterTapped() {
         // Go to Requesto form
-        delegate?.loginViewControllerRegisterVolunteer(self)
+        self.delegate?.loginViewControllerRegisterVolunteer(self)
     }
 }
 

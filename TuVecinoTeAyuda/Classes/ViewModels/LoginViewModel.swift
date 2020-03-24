@@ -15,9 +15,9 @@ final class LoginViewModel {
     var error: ((Error) -> Void)?
     
     let title = "Tu vecino te ayuda"
-    let requestorTitle = "Necesito ayuda"
-    let volunteerTitle = "Quiero ayudar"
-    let loginTitle = "Iniciar sesión"
+    let requestorTitle = "NECESITO AYUDA"
+    let volunteerTitle = "QUIERO AYUDAR"
+    let loginTitle = "ACCEDER"
     
     // MARK: - Private properties
     
