@@ -79,7 +79,6 @@ final class LoginViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.backgroundColor = Constants.Colors.green.cgColor
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("ACCEDER", for: .normal)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
@@ -89,7 +88,6 @@ final class LoginViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.backgroundColor = Constants.Colors.main.cgColor
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("QUIERO AYUDAR", for: .normal)
         button.addTarget(self, action: #selector(volunteerRegisterTapped), for: .touchUpInside)
         return button
     }()
@@ -99,7 +97,6 @@ final class LoginViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.backgroundColor = Constants.Colors.main.cgColor
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("NECESITO AYUDA", for: .normal)
         button.addTarget(self, action: #selector(requestorRegisterTapped), for: .touchUpInside)
         return button
     }()
