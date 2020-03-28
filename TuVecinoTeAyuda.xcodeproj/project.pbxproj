@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		A5421A6D24262A8D00D62CCF /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A6C24262A8D00D62CCF /* Images.swift */; };
 		A5421A6F2426840100D62CCF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A6E2426840100D62CCF /* Coordinator.swift */; };
 		A5421A712426873F00D62CCF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A702426873F00D62CCF /* Constants.swift */; };
+		A56297FA242D3E33008079D4 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56297F9242D3E33008079D4 /* InputField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		A5421A6C24262A8D00D62CCF /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		A5421A6E2426840100D62CCF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = ViewControllers/Coordinator.swift; sourceTree = "<group>"; };
 		A5421A702426873F00D62CCF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A56297F9242D3E33008079D4 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		E65D593715696062FE98CE78 /* Pods-TuVecinoTeAyuda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuVecinoTeAyuda.debug.xcconfig"; path = "Target Support Files/Pods-TuVecinoTeAyuda/Pods-TuVecinoTeAyuda.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +129,6 @@
 				E65D593715696062FE98CE78 /* Pods-TuVecinoTeAyuda.debug.xcconfig */,
 				534387CBCF8E92D7367F6E5D /* Pods-TuVecinoTeAyuda.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -203,6 +204,7 @@
 				36C7540024269DAF008087E5 /* Model */,
 				36C7540324269DEE008087E5 /* Utils */,
 				A5421A602425479100D62CCF /* ViewControllers */,
+				A5437CF7242E6CE20093E0CA /* Views */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -231,6 +233,14 @@
 				2E22FC17497679C350C856E0 /* Pods_TuVecinoTeAyuda.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5437CF7242E6CE20093E0CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A56297F9242D3E33008079D4 /* InputField.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,6 +421,7 @@
 				A5421A6F2426840100D62CCF /* Coordinator.swift in Sources */,
 				A5421A672425821200D62CCF /* UIView+Extensions.swift in Sources */,
 				36C7540724269E40008087E5 /* File.swift in Sources */,
+				A56297FA242D3E33008079D4 /* InputField.swift in Sources */,
 				A5421A6D24262A8D00D62CCF /* Images.swift in Sources */,
 				36C7540524269E0C008087E5 /* DecodableExtensions.swift in Sources */,
 				36C7540224269DBD008087E5 /* Province.swift in Sources */,
