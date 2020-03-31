@@ -11,6 +11,8 @@ import SwiftValidator
 protocol LoginViewControllerDelegate {
     func loginViewControllerRegisterVolunteer(_ sender: LoginViewController)
     func loginViewControllerRegisterRequestor(_ sender: LoginViewController)
+    func loginViewController(_ sender: LoginViewController, userLogged: User)
+    func loginViewController(_ sender: LoginViewController, didError: Error)
 }
 
 final class LoginViewController: UIViewController {
@@ -74,21 +76,18 @@ final class LoginViewController: UIViewController {
     
     var loginButton: Button = {
         let button = Button(buttonType: .primary)
-        button.setTitle("ACCEDER", for: .normal)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
     var volunteerButton: Button = {
         let button = Button(buttonType: .secondary)
-        button.setTitle("QUIERO AYUDAR", for: .normal)
         button.addTarget(self, action: #selector(volunteerRegisterTapped), for: .touchUpInside)
         return button
     }()
     
     var requestorButton: Button = {
         let button = Button(buttonType: .secondary)
-        button.setTitle("NECESITO AYUDA", for: .normal)
         button.addTarget(self, action: #selector(requestorRegisterTapped), for: .touchUpInside)
         return button
     }()
@@ -98,20 +97,34 @@ final class LoginViewController: UIViewController {
     // MARK: - Private properties
     
     private let validator = Validator()
+    private let viewModel: LoginViewModel
     
     // MARK: - Object lifecycle
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
         self.registerValidationFields()
         self.setupLayout()
+        self.setupViewModel()
     }
     
     // MARK: - Private methods
     
     private func setupView() {
-        title = "Tu vecino te ayuda"
+        title = viewModel.title
+        self.requestorButton.setTitle(viewModel.requestorTitle, for: .normal)
+        self.volunteerButton.setTitle(viewModel.volunteerTitle, for: .normal)
+        self.loginButton.setTitle(viewModel.loginTitle, for: .normal)
         self.userField.delegate = self
         self.passwordField.delegate = self
         self.configureTapGesture()
@@ -178,6 +191,22 @@ final class LoginViewController: UIViewController {
         ])
     }
     
+    private func setupViewModel() {
+        viewModel.error = { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.delegate?.loginViewController(self, didError: error)
+            }
+        }
+        
+        viewModel.logged = { [weak self] user in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.delegate?.loginViewController(self, userLogged: user)
+            }
+        }
+    }
+    
     private func configureTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleViewTap))
         self.view.addGestureRecognizer(tapGesture)
@@ -190,6 +219,9 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func loginTapped() {
+        guard let user = userField.text, let password = passwordField.text else {
+            return
+        }
         self.loginButton.endEditing(true)
         // Validate input fields
         validator.validate(self)
@@ -234,6 +266,7 @@ extension LoginViewController: UITextFieldDelegate {
 extension LoginViewController: ValidationDelegate {
     func validationSuccessful() {
         debugPrint("validation succedded")
+        self.viewModel.login(user: user, password: password)
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {

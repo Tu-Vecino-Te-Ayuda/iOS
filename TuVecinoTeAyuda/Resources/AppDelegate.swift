@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func makeCoordinator() -> UINavigationController {
         let navigationController = UINavigationController()
         navigationController.navigationBar.barTintColor = Constants.Colors.main
-        coordinator = Coordinator(navigationController: navigationController)
+        let service = Service(baseUrl: "https://api.tuvecinoteayuda.org")
+        coordinator = Coordinator(navigationController: navigationController, service: service)
         return navigationController
     }
 }
