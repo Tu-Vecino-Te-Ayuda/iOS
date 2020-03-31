@@ -58,58 +58,53 @@ final class LoginViewController: UIViewController {
     }()
     
     var userField: InputField = {
-        let inputField = InputField(textFieldHeight: 50)
-        inputField.placeholder = "Teléfono o email"
+        let inputField = InputField(textFieldHeight: LayoutParameters.inputFieldHeight)
+        inputField.textField.placeholder = "Teléfono o email"
+        inputField.textField.textContentType = .username
         return inputField
     }()
     
-    var passwordField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Contraseña"
-        textField.borderStyle = .roundedRect
-        textField.isSecureTextEntry = true
-        textField.textContentType = .password
-        return textField
+    var passwordField: InputField = {
+        let inputField = InputField(textFieldHeight: LayoutParameters.inputFieldHeight)
+        inputField.textField.placeholder = "Contraseña"
+        inputField.textField.isSecureTextEntry = true
+        inputField.textField.textContentType = .password
+        return inputField
     }()
     
-    var loginButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.layer.cornerRadius = 20
-        button.layer.backgroundColor = Constants.Colors.green.cgColor
-        button.setTitleColor(.white, for: .normal)
+    var loginButton: Button = {
+        let button = Button(buttonType: .primary)
         button.setTitle("ACCEDER", for: .normal)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
-    var volunteerButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.layer.cornerRadius = 20
-        button.layer.backgroundColor = Constants.Colors.main.cgColor
-        button.setTitleColor(.black, for: .normal)
+    var volunteerButton: Button = {
+        let button = Button(buttonType: .secondary)
         button.setTitle("QUIERO AYUDAR", for: .normal)
         button.addTarget(self, action: #selector(volunteerRegisterTapped), for: .touchUpInside)
         return button
     }()
     
-    var requestorButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.layer.cornerRadius = 20
-        button.layer.backgroundColor = Constants.Colors.main.cgColor
-        button.setTitleColor(.black, for: .normal)
+    var requestorButton: Button = {
+        let button = Button(buttonType: .secondary)
         button.setTitle("NECESITO AYUDA", for: .normal)
         button.addTarget(self, action: #selector(requestorRegisterTapped), for: .touchUpInside)
         return button
     }()
     
-    let validator = Validator()
     var delegate: LoginViewControllerDelegate?
+    
+    // MARK: - Private properties
+    
+    private let validator = Validator()
     
     // MARK: - Object lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.registerValidationFields()
         self.setupLayout()
     }
     
@@ -117,26 +112,19 @@ final class LoginViewController: UIViewController {
     
     private func setupView() {
         title = "Tu vecino te ayuda"
-//        self.userField.textField.delegate = self
+        self.userField.delegate = self
         self.passwordField.delegate = self
-        // Validation Rules are evaluated from left to right.
-        validator.registerField(userField, errorLabel: userField.errorLabel, rules: [RequiredRule(message: "Campo necesario"), EmailRule(message: "Introduce tu email")])
-        validator.registerField(passwordField, rules: [PasswordRule(message: "Introduce tu constraseña")])
-
-//        // You can pass in error labels with your rules
-//        // You can pass in custom error messages to regex rules (such as ZipCodeRule and EmailRule)
-//        validator.registerField(emailTextField, errorLabel: emailErrorLabel, rules: [RequiredRule(), EmailRule(message: "Invalid email")])
-//
-//        // You can validate against other fields using ConfirmRule
-//        validator.registerField(emailConfirmTextField, errorLabel: emailConfirmErrorLabel, rules: [ConfirmationRule(confirmField: emailTextField)])
-//
-//        // You can now pass in regex and length parameters through overloaded contructors
-//        validator.registerField(phoneNumberTextField, errorLabel: phoneNumberErrorLabel, rules: [RequiredRule(), MinLengthRule(length: 9)])
-//        validator.registerField(zipcodeTextField, errorLabel: zipcodeErrorLabel, rules: [RequiredRule(), ZipCodeRule(regex = "\\d{5}")])
-
-//         You can unregister a text field if you no longer want to validate it
-//        validator.unregisterField(fullNameTextField)
         self.configureTapGesture()
+    }
+    
+    private func registerValidationFields() {
+        self.validator.registerField(self.userField, errorLabel: self.userField.errorLabel, rules: [
+            RequiredRule(message: "Campo necesario")
+        ])
+        self.validator.registerField(self.passwordField, errorLabel: self.passwordField.errorLabel, rules: [
+            RequiredRule(message: "Campo necesario"),
+            MinLengthRule(length: 8, message: "Introduce mínimo 8 caracteres")
+        ])
     }
     
     private func setupLayout() {
@@ -149,7 +137,6 @@ final class LoginViewController: UIViewController {
         self.loginContainerView.addSubview(self.loginStackView)
         
         self.loginStackView.addArrangedSubview(self.userField)
-//        self.loginStackView.addArrangedSubview(self.userErrorLabel)
         self.loginStackView.addArrangedSubview(self.passwordField)
         self.loginStackView.addArrangedSubview(self.loginButton)
         self.registerStackView.addArrangedSubview(self.volunteerButton)
@@ -175,9 +162,7 @@ final class LoginViewController: UIViewController {
             // Adjust the size of the text fields.
             self.userField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor),
             self.passwordField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor),
-//            self.userField.heightAnchor.constraint(equalToConstant: 50),
-            self.passwordField.heightAnchor.constraint(equalToConstant: 50),
-            self.loginButton.heightAnchor.constraint(equalToConstant: 60),
+            self.loginButton.heightAnchor.constraint(equalToConstant: LayoutParameters.buttonHeight),
             self.loginStackView.widthAnchor.constraint(equalTo: self.loginButton.widthAnchor, multiplier: 1, constant: 95),
             
             // Then, the register elements.
@@ -188,8 +173,8 @@ final class LoginViewController: UIViewController {
             // Setup of the register buttons.
             self.requestorButton.widthAnchor.constraint(equalTo: self.loginButton.widthAnchor, multiplier: 1, constant: 30),
             self.volunteerButton.widthAnchor.constraint(equalTo: self.requestorButton.widthAnchor),
-            self.requestorButton.heightAnchor.constraint(equalTo: self.loginButton.heightAnchor),
-            self.volunteerButton.heightAnchor.constraint(equalTo: self.requestorButton.heightAnchor),
+            self.requestorButton.heightAnchor.constraint(equalToConstant: LayoutParameters.buttonHeight),
+            self.volunteerButton.heightAnchor.constraint(equalToConstant: LayoutParameters.buttonHeight),
         ])
     }
     
@@ -206,7 +191,7 @@ final class LoginViewController: UIViewController {
     @objc
     private func loginTapped() {
         self.loginButton.endEditing(true)
-        // Do login
+        // Validate input fields
         validator.validate(self)
     }
     
@@ -226,13 +211,22 @@ final class LoginViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//    }
-    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case userField.textField:
+            userField.validate(usingValidator: validator) { [weak self] in
+                guard let self = self else { return }
+                _ = self.passwordField.becomeFirstResponder()
+            }
+        default:
+            passwordField.validate(usingValidator: validator) { [weak self] in
+                guard let self = self else { return }
+                _ = self.passwordField.resignFirstResponder()
+            }
+        }
+        
+        return true
+    }
 }
 
 // MARK: - ValidatorDelegate
@@ -243,13 +237,11 @@ extension LoginViewController: ValidationDelegate {
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
-        errors.forEach { (field, error) in
-            guard let field = field as? InputField else {
+        errors.forEach { (validatable, error) in
+            guard let inputField = validatable as? InputField else {
                 return
             }
-//        }
-//        for (field, error) in validator.errors {
-            field.validationFailed(error.errorMessage)
+            inputField.validationFailed(error.errorMessage)
         }
     }
 }
@@ -261,5 +253,7 @@ private extension LoginViewController {
         static let spacing: CGFloat = 10.0
         static let verticalSpacing: CGFloat = 40.0
         static let margin: CGFloat = 16.0
+        static let inputFieldHeight: CGFloat = 50.0
+        static let buttonHeight: CGFloat = 60.0
     }
 }
