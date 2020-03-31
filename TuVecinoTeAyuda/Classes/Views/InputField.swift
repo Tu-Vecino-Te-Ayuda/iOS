@@ -21,29 +21,14 @@ final class InputField: UIView, Validatable {
         return textField.text ?? ""
     }
     
-    var placeholder: String? {
-        get {
-            textField.placeholder
-        }
-        set {
-            textField.placeholder = newValue
-        }
-    }
-    
-    var isSecureTextEntry: Bool {
-        get {
-            textField.isSecureTextEntry
-        }
-        set {
-            textField.isSecureTextEntry = newValue
-        }
-    }
-    
-    private let textField: UITextField = {
+    let textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.clearButtonMode = .whileEditing
+        textField.spellCheckingType = .no
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -92,10 +77,36 @@ final class InputField: UIView, Validatable {
         super.updateConstraints()
     }
     
+    override func becomeFirstResponder() -> Bool {
+        textField.becomeFirstResponder()
+        return super.becomeFirstResponder()
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        textField.resignFirstResponder()
+        return super.resignFirstResponder()
+    }
+    
     // MARK: - Internal methods
     
+    /// Use this method to set a user visible error message in the error label associated to this input field
+    /// - Parameter errorMessage: Error message intended to be read by the user
     func validationFailed(_ errorMessage: String) {
         updateErrorState(validationFailed: true, errorMessage)
+    }
+    
+    /// Validates a text field content according validation rules from the validator
+    /// - Parameter validator: Validator used to perform the validation
+    /// - Parameter completionHandler: Callback performed if validation was successful
+    func validate(usingValidator validator: Validator, completionHandler: @escaping () -> Void) {
+        validator.validateField(self) { (validationError) in
+            guard validationError == nil else {
+                updateErrorState(validationFailed: true, validationError?.errorMessage)
+                return
+            }
+            updateErrorState()
+            completionHandler()
+        }
     }
     
     // MARK: - Private methods
@@ -106,17 +117,15 @@ final class InputField: UIView, Validatable {
         addSubview(errorLabel)
     }
     
-    private func updateErrorState(validationFailed: Bool, _ errorMessage: String? = nil) {
-        textField.layer.borderColor = validationFailed
-            ? UIColor.red.cgColor
-            : UIColor.clear.cgColor
-        textField.layer.borderWidth = validationFailed
-            ? 1.0
-            : 0
+    /// Updates the error label associated to this input field based on the input validation
+    /// - Parameters:
+    ///   - validationFailed: `true` if the input field validation has failed. Default value is`false`
+    ///   - errorMessage: Error message intended to be read by the user
+    private func updateErrorState(validationFailed: Bool = false, _ errorMessage: String? = nil) {
+        textField.layer.borderColor = validationFailed ? UIColor.red.cgColor : UIColor.clear.cgColor
+        textField.layer.borderWidth = validationFailed ? 1.0 : 0
         errorLabel.text = errorMessage
-        errorLabel.isHidden = validationFailed
-            ? false
-            : true
+        errorLabel.isHidden = !validationFailed
     }
 }
 
@@ -125,12 +134,11 @@ final class InputField: UIView, Validatable {
 extension InputField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.textFieldDidBeginEditing?(textField)
-        updateErrorState(validationFailed: false)
+        updateErrorState()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let result = delegate?.textFieldShouldReturn?(textField)
-        textField.resignFirstResponder()
         return result ?? true
     }
 }
