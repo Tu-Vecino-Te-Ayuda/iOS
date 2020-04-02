@@ -219,9 +219,6 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func loginTapped() {
-        guard let user = userField.text, let password = passwordField.text else {
-            return
-        }
         self.loginButton.endEditing(true)
         // Validate input fields
         validator.validate(self)
@@ -266,6 +263,9 @@ extension LoginViewController: UITextFieldDelegate {
 extension LoginViewController: ValidationDelegate {
     func validationSuccessful() {
         debugPrint("validation succedded")
+        guard let user = userField.textField.text, let password = passwordField.textField.text else {
+            return
+        }
         self.viewModel.login(user: user, password: password)
     }
     
