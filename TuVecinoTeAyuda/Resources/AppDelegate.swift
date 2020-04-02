@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var coordinator: Coordinator?
+    var navigationController = UINavigationController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -32,9 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func makeCoordinator() -> UINavigationController {
-        let navigationController = UINavigationController()
         navigationController.navigationBar.barTintColor = Constants.Colors.main
-        let service = Service(baseUrl: "https://api.tuvecinoteayuda.org")
+        let service = Service(baseUrl: "https://back.tuvecinoteayuda.org")
         coordinator = Coordinator(navigationController: navigationController, service: service)
         return navigationController
     }

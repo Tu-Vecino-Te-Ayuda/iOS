@@ -25,7 +25,7 @@ final class Service: ServiceType {
     
     private let baseUrl: String
     private var token: String?
-    private let loginEndpoint = "/api/login"
+    private let loginEndpoint = "/api/public/auth/login"
     
     // MARK: - Object lifecycle
     
