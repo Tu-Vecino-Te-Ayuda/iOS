@@ -30,6 +30,7 @@
 		A5421A7F2426C8B500D62CCF /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A7E2426C8B500D62CCF /* APIParser.swift */; };
 		A550812C243372C900D9A98A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550812B243372C900D9A98A /* Button.swift */; };
 		A56297FA242D3E33008079D4 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56297F9242D3E33008079D4 /* InputField.swift */; };
+		A59B0A9F2436814B0089B059 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B0A9E2436814B0089B059 /* AlertHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		A5421A7E2426C8B500D62CCF /* APIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		A550812B243372C900D9A98A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		A56297F9242D3E33008079D4 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
+		A59B0A9E2436814B0089B059 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		E65D593715696062FE98CE78 /* Pods-TuVecinoTeAyuda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuVecinoTeAyuda.debug.xcconfig"; path = "Target Support Files/Pods-TuVecinoTeAyuda/Pods-TuVecinoTeAyuda.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -237,6 +239,7 @@
 			children = (
 				A5421A702426873F00D62CCF /* Constants.swift */,
 				A5421A662425821200D62CCF /* UIView+Extensions.swift */,
+				A59B0A9E2436814B0089B059 /* AlertHandler.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				36C7540724269E40008087E5 /* File.swift in Sources */,
 				A56297FA242D3E33008079D4 /* InputField.swift in Sources */,
 				A5421A6D24262A8D00D62CCF /* Images.swift in Sources */,
+				A59B0A9F2436814B0089B059 /* AlertHandler.swift in Sources */,
 				36C7540524269E0C008087E5 /* DecodableExtensions.swift in Sources */,
 				A5421A7F2426C8B500D62CCF /* APIParser.swift in Sources */,
 				36C7540224269DBD008087E5 /* Province.swift in Sources */,
