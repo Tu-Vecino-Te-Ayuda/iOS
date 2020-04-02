@@ -80,8 +80,4 @@ extension Coordinator: LoginViewControllerDelegate {
     func loginViewController(_ sender: LoginViewController, userLogged: User) {
         showDashboard()
     }
-    
-    func loginViewController(_ sender: LoginViewController, didError error: Error) {
-        debugPrint(error)
-    }
 }

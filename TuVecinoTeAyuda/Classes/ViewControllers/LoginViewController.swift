@@ -12,7 +12,6 @@ protocol LoginViewControllerDelegate {
     func loginViewControllerRegisterVolunteer(_ sender: LoginViewController)
     func loginViewControllerRegisterRequestor(_ sender: LoginViewController)
     func loginViewController(_ sender: LoginViewController, userLogged: User)
-    func loginViewController(_ sender: LoginViewController, didError: Error)
 }
 
 final class LoginViewController: UIViewController {
@@ -195,7 +194,6 @@ final class LoginViewController: UIViewController {
         viewModel.error = { [weak self] error in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.delegate?.loginViewController(self, didError: error)
             }
         }
         
