@@ -14,7 +14,7 @@ protocol LoginViewControllerDelegate {
     func loginViewController(_ sender: LoginViewController, userLogged: User)
 }
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, AlertHandler {
     
     // MARK: - Internal properties
     
@@ -194,6 +194,14 @@ final class LoginViewController: UIViewController {
         viewModel.error = { [weak self] error in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.showAlert(title: "Error", message: "Algo ha fallado al iniciar sesión, revise el formulario e inténtelo de nuevo más tarde", buttonTitle: "Ok")
+            }
+        }
+        
+        viewModel.operationInProgress = { [weak self] inProgress in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.loginButton.isEnabled = !inProgress
             }
         }
         

@@ -12,7 +12,8 @@ final class LoginViewModel {
     // MARK: - Internal properties
     
     var logged: ((User) -> Void)?
-    var error: ((Error) -> Void)?
+    var operationInProgress: ((Bool) -> Void)?
+    var error: ((APIError) -> Void)?
     
     let title = "Tu vecino te ayuda"
     let requestorTitle = "Necesito ayuda"
@@ -33,7 +34,10 @@ final class LoginViewModel {
     
     func login(user: String, password: String) {
         let parameters = ["user": user, "password": password]
-        service.login(parameters: parameters) { result in
+        operationInProgress?(true)
+        service.login(parameters: parameters) { [weak self] result in
+            guard let self = self else { return }
+            self.operationInProgress?(false)
             switch result {
             case .success(let response):
                 self.logged?(response.user)
