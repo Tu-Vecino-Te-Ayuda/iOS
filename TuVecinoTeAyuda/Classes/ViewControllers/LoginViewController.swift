@@ -62,6 +62,10 @@ final class LoginViewController: UIViewController, AlertHandler {
         let inputField = InputField(textFieldHeight: LayoutParameters.inputFieldHeight)
         inputField.textField.placeholder = "Teléfono o email"
         inputField.textField.textContentType = .username
+        let imageView = UIImageView(image: Images.user)
+        imageView.tintColor = .black
+        inputField.textField.leftView = imageView
+        inputField.textField.leftViewMode = .always
         return inputField
     }()
     
@@ -70,6 +74,10 @@ final class LoginViewController: UIViewController, AlertHandler {
         inputField.textField.placeholder = "Contraseña"
         inputField.textField.isSecureTextEntry = true
         inputField.textField.textContentType = .password
+        let imageView = UIImageView(image: Images.lock)
+        imageView.tintColor = .black
+        inputField.textField.leftView = imageView
+        inputField.textField.leftViewMode = .always
         return inputField
     }()
     
