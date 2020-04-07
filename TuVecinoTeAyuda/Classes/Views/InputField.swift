@@ -21,8 +21,8 @@ final class InputField: UIView, Validatable {
         return textField.text ?? ""
     }
     
-    let textField: UITextField = {
-        let textField = UITextField()
+    let textField: TextField = {
+        let textField = TextField(leftViewPadding: 8)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.clearButtonMode = .whileEditing
