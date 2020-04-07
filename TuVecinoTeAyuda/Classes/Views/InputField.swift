@@ -39,6 +39,8 @@ final class InputField: UIView, Validatable {
         return label
     }()
     
+    // MARK: - Private properties
+    
     private lazy var errorLabelConstraints: [NSLayoutConstraint] = {
         return [
             errorLabel.leadingAnchor.constraint(equalTo: self.textField.textInputView.leadingAnchor),
