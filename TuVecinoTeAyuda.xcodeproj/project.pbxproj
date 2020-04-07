@@ -31,6 +31,7 @@
 		A550812C243372C900D9A98A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550812B243372C900D9A98A /* Button.swift */; };
 		A56297FA242D3E33008079D4 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56297F9242D3E33008079D4 /* InputField.swift */; };
 		A59B0A9F2436814B0089B059 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B0A9E2436814B0089B059 /* AlertHandler.swift */; };
+		A59B0AA5243CD1400089B059 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B0AA4243CD1400089B059 /* TextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		A550812B243372C900D9A98A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		A56297F9242D3E33008079D4 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		A59B0A9E2436814B0089B059 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
+		A59B0AA4243CD1400089B059 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E65D593715696062FE98CE78 /* Pods-TuVecinoTeAyuda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuVecinoTeAyuda.debug.xcconfig"; path = "Target Support Files/Pods-TuVecinoTeAyuda/Pods-TuVecinoTeAyuda.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -292,6 +294,7 @@
 			children = (
 				A550812B243372C900D9A98A /* Button.swift */,
 				A56297F9242D3E33008079D4 /* InputField.swift */,
+				A59B0AA4243CD1400089B059 /* TextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */,
 				A5421A772426A95300D62CCF /* Service.swift in Sources */,
 				A5421A742426A8F200D62CCF /* LoginViewModel.swift in Sources */,
+				A59B0AA5243CD1400089B059 /* TextField.swift in Sources */,
 				A5421A712426873F00D62CCF /* Constants.swift in Sources */,
 				A550812C243372C900D9A98A /* Button.swift in Sources */,
 			);
