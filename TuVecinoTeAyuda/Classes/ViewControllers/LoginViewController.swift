@@ -6,15 +6,15 @@
 //
 
 import UIKit
+import SwiftValidator
 
 protocol LoginViewControllerDelegate {
     func loginViewControllerRegisterVolunteer(_ sender: LoginViewController)
     func loginViewControllerRegisterRequestor(_ sender: LoginViewController)
     func loginViewController(_ sender: LoginViewController, userLogged: User)
-    func loginViewController(_ sender: LoginViewController, didError: Error)
 }
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, AlertHandler {
     
     // MARK: - Internal properties
     
@@ -58,45 +58,43 @@ final class LoginViewController: UIViewController {
         return imageView
     }()
     
-    var userField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Teléfono o email"
-        textField.borderStyle = .roundedRect
-        return textField
+    var userField: InputField = {
+        let inputField = InputField(textFieldHeight: LayoutParameters.inputFieldHeight)
+        inputField.textField.placeholder = "Teléfono o email"
+        inputField.textField.textContentType = .username
+        let imageView = UIImageView(image: Images.user)
+        imageView.tintColor = .black
+        inputField.textField.leftView = imageView
+        inputField.textField.leftViewMode = .always
+        return inputField
     }()
     
-    var passwordField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Contraseña"
-        textField.borderStyle = .roundedRect
-        textField.isSecureTextEntry = true
-        textField.textContentType = .password
-        return textField
+    var passwordField: InputField = {
+        let inputField = InputField(textFieldHeight: LayoutParameters.inputFieldHeight)
+        inputField.textField.placeholder = "Contraseña"
+        inputField.textField.isSecureTextEntry = true
+        inputField.textField.textContentType = .password
+        let imageView = UIImageView(image: Images.lock)
+        imageView.tintColor = .black
+        inputField.textField.leftView = imageView
+        inputField.textField.leftViewMode = .always
+        return inputField
     }()
     
-    var loginButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.layer.cornerRadius = 20
-        button.layer.backgroundColor = Constants.Colors.green.cgColor
-        button.setTitleColor(.white, for: .normal)
+    var loginButton: Button = {
+        let button = Button(buttonType: .primary)
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
-    var volunteerButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.layer.cornerRadius = 20
-        button.layer.backgroundColor = Constants.Colors.main.cgColor
-        button.setTitleColor(.black, for: .normal)
+    var volunteerButton: Button = {
+        let button = Button(buttonType: .secondary)
         button.addTarget(self, action: #selector(volunteerRegisterTapped), for: .touchUpInside)
         return button
     }()
     
-    var requestorButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.layer.cornerRadius = 20
-        button.layer.backgroundColor = Constants.Colors.main.cgColor
-        button.setTitleColor(.black, for: .normal)
+    var requestorButton: Button = {
+        let button = Button(buttonType: .secondary)
         button.addTarget(self, action: #selector(requestorRegisterTapped), for: .touchUpInside)
         return button
     }()
@@ -105,6 +103,7 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Private properties
     
+    private let validator = Validator()
     private let viewModel: LoginViewModel
     
     // MARK: - Object lifecycle
@@ -121,6 +120,7 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        self.registerValidationFields()
         self.setupLayout()
         self.setupViewModel()
     }
@@ -135,6 +135,16 @@ final class LoginViewController: UIViewController {
         self.userField.delegate = self
         self.passwordField.delegate = self
         self.configureTapGesture()
+    }
+    
+    private func registerValidationFields() {
+        self.validator.registerField(self.userField, errorLabel: self.userField.errorLabel, rules: [
+            RequiredRule(message: "Campo necesario")
+        ])
+        self.validator.registerField(self.passwordField, errorLabel: self.passwordField.errorLabel, rules: [
+            RequiredRule(message: "Campo necesario"),
+            MinLengthRule(length: 8, message: "Introduce mínimo 8 caracteres")
+        ])
     }
     
     private func setupLayout() {
@@ -172,9 +182,7 @@ final class LoginViewController: UIViewController {
             // Adjust the size of the text fields.
             self.userField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor),
             self.passwordField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor),
-            self.userField.heightAnchor.constraint(equalToConstant: 50),
-            self.passwordField.heightAnchor.constraint(equalToConstant: 50),
-            self.loginButton.heightAnchor.constraint(equalToConstant: 60),
+            self.loginButton.heightAnchor.constraint(equalToConstant: LayoutParameters.buttonHeight),
             self.loginStackView.widthAnchor.constraint(equalTo: self.loginButton.widthAnchor, multiplier: 1, constant: 95),
             
             // Then, the register elements.
@@ -185,8 +193,8 @@ final class LoginViewController: UIViewController {
             // Setup of the register buttons.
             self.requestorButton.widthAnchor.constraint(equalTo: self.loginButton.widthAnchor, multiplier: 1, constant: 30),
             self.volunteerButton.widthAnchor.constraint(equalTo: self.requestorButton.widthAnchor),
-            self.requestorButton.heightAnchor.constraint(equalTo: self.loginButton.heightAnchor),
-            self.volunteerButton.heightAnchor.constraint(equalTo: self.requestorButton.heightAnchor),
+            self.requestorButton.heightAnchor.constraint(equalToConstant: LayoutParameters.buttonHeight),
+            self.volunteerButton.heightAnchor.constraint(equalToConstant: LayoutParameters.buttonHeight),
         ])
     }
     
@@ -194,7 +202,14 @@ final class LoginViewController: UIViewController {
         viewModel.error = { [weak self] error in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.delegate?.loginViewController(self, didError: error)
+                self.showAlert(title: "Error", message: "Algo ha fallado al iniciar sesión, revise el formulario e inténtelo de nuevo más tarde", buttonTitle: "Ok")
+            }
+        }
+        
+        viewModel.operationInProgress = { [weak self] inProgress in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.loginButton.isEnabled = !inProgress
             }
         }
         
@@ -218,11 +233,9 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func loginTapped() {
-        guard let user = userField.text, let password = passwordField.text else {
-            return
-        }
         self.loginButton.endEditing(true)
-        self.viewModel.login(user: user, password: password)
+        // Validate input fields
+        validator.validate(self)
     }
     
     @objc
@@ -242,8 +255,41 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        switch textField {
+        case userField.textField:
+            userField.validate(usingValidator: validator) { [weak self] in
+                guard let self = self else { return }
+                _ = self.passwordField.becomeFirstResponder()
+            }
+        default:
+            passwordField.validate(usingValidator: validator) { [weak self] in
+                guard let self = self else { return }
+                _ = self.passwordField.resignFirstResponder()
+            }
+        }
+        
         return true
+    }
+}
+
+// MARK: - ValidatorDelegate
+
+extension LoginViewController: ValidationDelegate {
+    func validationSuccessful() {
+        debugPrint("validation succedded")
+        guard let user = userField.textField.text, let password = passwordField.textField.text else {
+            return
+        }
+        self.viewModel.login(user: user, password: password)
+    }
+    
+    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+        errors.forEach { (validatable, error) in
+            guard let inputField = validatable as? InputField else {
+                return
+            }
+            inputField.validationFailed(error.errorMessage)
+        }
     }
 }
 
@@ -251,8 +297,10 @@ extension LoginViewController: UITextFieldDelegate {
 
 private extension LoginViewController {
     struct LayoutParameters {
-        static let spacing: CGFloat = 16.0
+        static let spacing: CGFloat = 10.0
         static let verticalSpacing: CGFloat = 40.0
         static let margin: CGFloat = 16.0
+        static let inputFieldHeight: CGFloat = 50.0
+        static let buttonHeight: CGFloat = 60.0
     }
 }

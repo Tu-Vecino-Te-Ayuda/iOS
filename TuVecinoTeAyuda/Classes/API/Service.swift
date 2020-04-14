@@ -25,7 +25,7 @@ final class Service: ServiceType {
     
     private let baseUrl: String
     private var token: String?
-    private let loginEndpoint = "/api/login"
+    private let loginEndpoint = "/api/public/auth/login"
     
     // MARK: - Object lifecycle
     
@@ -52,6 +52,7 @@ final class Service: ServiceType {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 completionHandler(.failure(.apiError(error)))
+                return
             }
             
             guard let response = response as? HTTPURLResponse else {
@@ -60,6 +61,7 @@ final class Service: ServiceType {
             }
             
             guard response.statusCode == 200 else {
+                debugPrint(response)
                 completionHandler(.failure(.statusCode(response.statusCode)))
                 return
             }
