@@ -30,6 +30,7 @@
 		A5421A7F2426C8B500D62CCF /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A7E2426C8B500D62CCF /* APIParser.swift */; };
 		A550812C243372C900D9A98A /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550812B243372C900D9A98A /* Button.swift */; };
 		A56297FA242D3E33008079D4 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56297F9242D3E33008079D4 /* InputField.swift */; };
+		A56EF43624365B800034578F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56EF43524365B800034578F /* Configuration.swift */; };
 		A59B0A9F2436814B0089B059 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B0A9E2436814B0089B059 /* AlertHandler.swift */; };
 		A59B0AA5243CD1400089B059 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59B0AA4243CD1400089B059 /* TextField.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,9 @@
 		A5421A7E2426C8B500D62CCF /* APIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
 		A550812B243372C900D9A98A /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		A56297F9242D3E33008079D4 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
+		A56EF433243659D70034578F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		A56EF43424365A130034578F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		A56EF43524365B800034578F /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		A59B0A9E2436814B0089B059 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		A59B0AA4243CD1400089B059 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E65D593715696062FE98CE78 /* Pods-TuVecinoTeAyuda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuVecinoTeAyuda.debug.xcconfig"; path = "Target Support Files/Pods-TuVecinoTeAyuda/Pods-TuVecinoTeAyuda.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 				A5421A682426205600D62CCF /* TuVecinoTeAyuda.entitlements */,
 				A5421A3C24252CC900D62CCF /* Info.plist */,
 				A5421A5F2425472100D62CCF /* Classes */,
+				A56EF432243659BB0034578F /* Config */,
 				A5421A5E2425471800D62CCF /* Resources */,
 			);
 			path = TuVecinoTeAyuda;
@@ -204,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				A5421A2E24252CC500D62CCF /* AppDelegate.swift */,
+				A56EF43524365B800034578F /* Configuration.swift */,
 				36C7540624269E40008087E5 /* File.swift */,
 				A5421A6C24262A8D00D62CCF /* Images.swift */,
 				A5421A3724252CC900D62CCF /* Assets.xcassets */,
@@ -297,6 +303,15 @@
 				A59B0AA4243CD1400089B059 /* TextField.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A56EF432243659BB0034578F /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A56EF433243659D70034578F /* Debug.xcconfig */,
+				A56EF43424365A130034578F /* Release.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,6 +500,7 @@
 				36C7540524269E0C008087E5 /* DecodableExtensions.swift in Sources */,
 				A5421A7F2426C8B500D62CCF /* APIParser.swift in Sources */,
 				36C7540224269DBD008087E5 /* Province.swift in Sources */,
+				A56EF43624365B800034578F /* Configuration.swift in Sources */,
 				A5421A62242547B900D62CCF /* LoginViewController.swift in Sources */,
 				A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */,
 				A5421A772426A95300D62CCF /* Service.swift in Sources */,
@@ -540,6 +556,7 @@
 /* Begin XCBuildConfiguration section */
 		A5421A5324252CCA00D62CCF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A56EF433243659D70034578F /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -600,6 +617,7 @@
 		};
 		A5421A5424252CCA00D62CCF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A56EF43424365A130034578F /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
