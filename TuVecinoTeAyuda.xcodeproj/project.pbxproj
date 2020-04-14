@@ -27,6 +27,7 @@
 		A5421A7A2426B6F900D62CCF /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A792426B6F900D62CCF /* LoginResponse.swift */; };
 		A5421A7C2426B73800D62CCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A7B2426B73800D62CCF /* User.swift */; };
 		A5421A7F2426C8B500D62CCF /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5421A7E2426C8B500D62CCF /* APIParser.swift */; };
+		A56EF43624365B800034578F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56EF43524365B800034578F /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,9 @@
 		A5421A792426B6F900D62CCF /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		A5421A7B2426B73800D62CCF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A5421A7E2426C8B500D62CCF /* APIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
+		A56EF433243659D70034578F /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		A56EF43424365A130034578F /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		A56EF43524365B800034578F /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,7 @@
 				A5421A682426205600D62CCF /* TuVecinoTeAyuda.entitlements */,
 				A5421A3C24252CC900D62CCF /* Info.plist */,
 				A5421A5F2425472100D62CCF /* Classes */,
+				A56EF432243659BB0034578F /* Config */,
 				A5421A5E2425471800D62CCF /* Resources */,
 			);
 			path = TuVecinoTeAyuda;
@@ -181,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				A5421A2E24252CC500D62CCF /* AppDelegate.swift */,
+				A56EF43524365B800034578F /* Configuration.swift */,
 				36C7540624269E40008087E5 /* File.swift */,
 				A5421A6C24262A8D00D62CCF /* Images.swift */,
 				A5421A3724252CC900D62CCF /* Assets.xcassets */,
@@ -261,6 +267,15 @@
 				A5421A7E2426C8B500D62CCF /* APIParser.swift */,
 			);
 			path = Parser;
+			sourceTree = "<group>";
+		};
+		A56EF432243659BB0034578F /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A56EF433243659D70034578F /* Debug.xcconfig */,
+				A56EF43424365A130034578F /* Release.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,6 +418,7 @@
 				36C7540524269E0C008087E5 /* DecodableExtensions.swift in Sources */,
 				A5421A7F2426C8B500D62CCF /* APIParser.swift in Sources */,
 				36C7540224269DBD008087E5 /* Province.swift in Sources */,
+				A56EF43624365B800034578F /* Configuration.swift in Sources */,
 				A5421A62242547B900D62CCF /* LoginViewController.swift in Sources */,
 				A5421A2F24252CC500D62CCF /* AppDelegate.swift in Sources */,
 				A5421A772426A95300D62CCF /* Service.swift in Sources */,
@@ -456,6 +472,7 @@
 /* Begin XCBuildConfiguration section */
 		A5421A5324252CCA00D62CCF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A56EF433243659D70034578F /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -516,6 +533,7 @@
 		};
 		A5421A5424252CCA00D62CCF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A56EF43424365A130034578F /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
